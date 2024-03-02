@@ -81,3 +81,14 @@ func (list *LinkedList) Search(element int) bool {
 	}
 	return false
 }
+
+func (list *LinkedList) Sort(element int) {
+	panic("NOT IMPLEMENTED")
+}
+
+func (list *LinkedList) Insert(element int, position int) {
+	panic("NOT IMPLEMENTED")
+}
+func (list *LinkedList) Delete(element int, occurence int) bool {
+	panic("NOT IMPLEMENTED")
+}
