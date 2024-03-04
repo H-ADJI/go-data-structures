@@ -13,8 +13,9 @@ type Node struct {
 	next *Node
 }
 
-func (node Node) String() string {
-	return fmt.Sprintf(nodeTemplate, node.data)
+type LinkedList struct {
+	head   *Node
+	length int
 }
 
 type LinkedListIterator struct {
@@ -22,6 +23,13 @@ type LinkedListIterator struct {
 	current *Node
 }
 
+func (node Node) String() string {
+	return fmt.Sprintf(nodeTemplate, node.data)
+}
+func New() *LinkedList {
+	head := Node{}
+	return &LinkedList{head: &head, length: 0}
+}
 func (listIterator *LinkedListIterator) hasNext() bool {
 	return listIterator.current.next != nil
 }
@@ -38,15 +46,6 @@ func (list LinkedList) iterator() *LinkedListIterator {
 	return &LinkedListIterator{list: list, current: list.head}
 }
 
-type LinkedList struct {
-	head   *Node
-	length int
-}
-
-func New() *LinkedList {
-	head := Node{}
-	return &LinkedList{head: &head, length: 0}
-}
 func (list LinkedList) String() string {
 	var stringBuidler strings.Builder
 	iterator := list.iterator()
@@ -56,39 +55,4 @@ func (list LinkedList) String() string {
 		stringBuidler.WriteString(arrow)
 	}
 	return strings.TrimSuffix(stringBuidler.String(), arrow)
-}
-
-func (list *LinkedList) FromArray(array []int) *LinkedList {
-	currentNode := list.head
-	for _, el := range array {
-		currentNode.data = el
-		currentNode.next = new(Node)
-		list.length++
-		currentNode = currentNode.next
-	}
-	return list
-}
-func (list *LinkedList) Search(element int) bool {
-	if list.length == 0 {
-		return false
-	}
-	current := list.head
-	for current != nil {
-		if current.data == element {
-			return true
-		}
-		current = current.next
-	}
-	return false
-}
-
-func (list *LinkedList) Sort(element int) {
-	panic("NOT IMPLEMENTED")
-}
-
-func (list *LinkedList) Insert(element int, position int) {
-	panic("NOT IMPLEMENTED")
-}
-func (list *LinkedList) Delete(element int, occurence int) bool {
-	panic("NOT IMPLEMENTED")
 }
