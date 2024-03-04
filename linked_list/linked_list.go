@@ -1,3 +1,4 @@
+// Linked lists structure implementation and some helper functions
 package linked_list
 
 import (
@@ -14,7 +15,7 @@ type Node struct {
 }
 
 type LinkedList struct {
-	head   *Node
+	Head   *Node
 	length int
 }
 
@@ -28,29 +29,29 @@ func (node Node) String() string {
 }
 func New() *LinkedList {
 	head := Node{}
-	return &LinkedList{head: &head, length: 0}
+	return &LinkedList{Head: &head, length: 0}
 }
-func (listIterator *LinkedListIterator) hasNext() bool {
+func (listIterator *LinkedListIterator) HasNext() bool {
 	return listIterator.current.next != nil
 }
 func (listIterator *LinkedListIterator) next() {
 	listIterator.current = listIterator.current.next
 }
 
-func (listIterator *LinkedListIterator) getNext() *Node {
+func (listIterator *LinkedListIterator) GetNext() *Node {
 	defer listIterator.next()
 	return listIterator.current
 }
 
-func (list LinkedList) iterator() *LinkedListIterator {
-	return &LinkedListIterator{list: list, current: list.head}
+func (list LinkedList) Iterator() *LinkedListIterator {
+	return &LinkedListIterator{list: list, current: list.Head}
 }
 
 func (list LinkedList) String() string {
 	var stringBuidler strings.Builder
-	iterator := list.iterator()
-	for iterator.hasNext() {
-		node := iterator.getNext()
+	iterator := list.Iterator()
+	for iterator.HasNext() {
+		node := iterator.GetNext()
 		stringBuidler.WriteString(node.String())
 		stringBuidler.WriteString(arrow)
 	}

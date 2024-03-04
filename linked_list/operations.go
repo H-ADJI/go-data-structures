@@ -10,6 +10,15 @@ func (list *LinkedList) FromArray(array []int) {
 		currentNode = currentNode.next
 	}
 }
+func (list *LinkedList) ToArray() []int {
+	iterator := list.Iterator()
+	arr := []int{}
+	for iterator.HasNext() {
+		node := iterator.GetNext()
+		arr = append(arr, node.data)
+	}
+	return arr
+}
 func (list *LinkedList) Search(element int) bool {
 	if list.length == 0 {
 		return false
