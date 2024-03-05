@@ -48,16 +48,15 @@ func (list *LinkedList) Sort() {
 	for i := 0; i < list.length; i++ {
 		var preceding *Node = nil
 		current := list.Head
-		for j := 0; j < list.length-i; j++ {
+		for j := 0; j < list.length-i-1; j++ {
 			following := current.next
-			if following != nil {
-				if current.data > following.data {
-					current.Swap(preceding, following)
-					preceding = following
-				} else {
-					preceding = current
-					current = following
-				}
+			if current.data > following.data {
+				// swaping current and following node order
+				current.Swap(preceding, following)
+				preceding = following
+			} else {
+				preceding = current
+				current = following
 			}
 		}
 

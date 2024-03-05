@@ -9,7 +9,7 @@ import (
 const Hello = "lol"
 
 func main() {
-	array := []int{2, 3, 5, 3, 2, 1, 6, 9, 4, 232, 43, 2, 0}
+	array := []int{1, 3, 2, 4}
 	list := linkedList.New()
 	list.FromArray(array)
 	list.Sort()

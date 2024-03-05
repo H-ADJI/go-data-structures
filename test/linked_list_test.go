@@ -60,6 +60,7 @@ func TestSort(t *testing.T) {
 	list.FromArray(array)
 	list.Sort()
 	arrayExpected = []int{1, 2, 3, 4}
+	array = list.ToArray()
 	for i := range arrayExpected {
 		if array[i] != arrayExpected[i] {
 			t.Fatalf("\nexpected ->> %v \nbut got ->> %v", arrayExpected, array)
