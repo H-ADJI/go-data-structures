@@ -5,6 +5,7 @@ import (
 	"fmt"
 )
 
+// Initialize a linked list elements using a slice
 func (list *LinkedList) FromArray(array []int) {
 	currentNode := list.head
 	for _, el := range array {
@@ -14,6 +15,7 @@ func (list *LinkedList) FromArray(array []int) {
 		currentNode = currentNode.next
 	}
 }
+
 func (list *LinkedList) ToArray() []int {
 	iterator := list.Iterator()
 	arr := []int{}
@@ -23,6 +25,7 @@ func (list *LinkedList) ToArray() []int {
 	}
 	return arr
 }
+
 func (list *LinkedList) Search(element int) bool {
 	if list.length == 0 {
 		return false
@@ -90,8 +93,8 @@ func (list *LinkedList) Insert(element int, position int) error {
 		node.next = current
 	}
 	return nil
-
 }
+
 func (list *LinkedList) Delete(element int) bool {
 	var preceding *listNode
 	iterator := list.Iterator()

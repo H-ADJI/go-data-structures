@@ -4,6 +4,17 @@ import (
 	"testing"
 )
 
+func compareSlice(slice1 []int, slice2 []int) bool {
+	if len(slice1) != len(slice2) {
+		return false
+	}
+	for i := range slice1 {
+		if slice1[i] != slice2[i] {
+			return false
+		}
+	}
+	return true
+}
 func TestNew(t *testing.T) {
 	list := NewLinkedList()
 	if list == nil {
@@ -11,6 +22,26 @@ func TestNew(t *testing.T) {
 	}
 	if list == nil {
 		t.Fatalf(`Wanted non-nil pointer for linked list, got %p pointer`, list)
+	}
+}
+
+func TestFromArray(t *testing.T) {
+	array := []int{2, 3, 5, 3, 2, 1, 6, 9, 4, 232, 43, 2, 0}
+	list := NewLinkedList()
+	list.FromArray(array)
+	for _, element := range array {
+		if !list.Search(element) {
+			t.Fatalf("Element %v should be in the list", element)
+		}
+	}
+}
+
+func TestToArray(t *testing.T) {
+	array := []int{2, 3, 5, 3, 2}
+	list := NewLinkedList()
+	list.FromArray(array)
+	if !compareSlice(array, list.ToArray()) {
+		t.Fatalf("Both arrays should be equal but got : \noriginal array : %v \nresulting array : %v", array, list.ToArray())
 	}
 }
 func TestSwap(t *testing.T) {
@@ -32,16 +63,6 @@ func TestSwap(t *testing.T) {
 	for i := range arrayExpected {
 		if array[i] != arrayExpected[i] {
 			t.Fatalf("\nexpected ->> %v \nbut got ->> %v", arrayExpected, array)
-		}
-	}
-}
-func TestFromArray(t *testing.T) {
-	array := []int{2, 3, 5, 3, 2, 1, 6, 9, 4, 232, 43, 2, 0}
-	list := NewLinkedList()
-	list.FromArray(array)
-	for _, element := range array {
-		if !list.Search(element) {
-			t.Fatalf("Element %v should be in the list", element)
 		}
 	}
 }
