@@ -37,6 +37,17 @@ func TestSwap(t *testing.T) {
 		}
 	}
 }
+func TestFromArray(t *testing.T) {
+	array := []int{2, 3, 5, 3, 2, 1, 6, 9, 4, 232, 43, 2, 0}
+	list := linkedList.New()
+	list.FromArray(array)
+	for _, element := range array {
+		if !list.Search(element) {
+			t.Fatalf("Element %v should be in the list", element)
+		}
+	}
+}
+
 func TestSearch(t *testing.T) {
 	list := linkedList.New()
 	if list.Search(0) {
@@ -68,13 +79,31 @@ func TestSort(t *testing.T) {
 
 	}
 }
-func TestFromArray(t *testing.T) {
+func TestInsert(t *testing.T) {
 	array := []int{2, 3, 5, 3, 2, 1, 6, 9, 4, 232, 43, 2, 0}
 	list := linkedList.New()
 	list.FromArray(array)
-	for _, element := range array {
-		if !list.Search(element) {
-			t.Fatalf("Element %v should be in the list", element)
-		}
+	err := list.Insert(99, 88)
+	if err == nil {
+		t.Fatalf("The insert should return an error \n %v", list)
 	}
+	err = list.Insert(99, 0)
+	if err != nil {
+		t.Fatalf("element 99 should be the first element of the list but we got \n %v", list)
+	}
+	modifiedList := linkedList.New()
+	modifiedArray := []int{99, 2, 3, 5, 3, 2, 1, 6, 9, 4, 232, 43, 2, 0}
+	modifiedList.FromArray(modifiedArray)
+	err = modifiedList.Insert(99, 0)
+	if err != nil {
+		t.Fatalf("could not insert into list")
+	}
+	arrayExpected := list.ToArray()
+	for i := range arrayExpected {
+		if modifiedArray[i] != arrayExpected[i] {
+			t.Fatalf("\nexpected ->> %v \nbut got ->> %v", arrayExpected, modifiedArray)
+		}
+
+	}
+
 }

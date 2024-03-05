@@ -1,6 +1,10 @@
 // Operations to perform multiple actions on the linked list data structure
 package linked_list
 
+import (
+	"fmt"
+)
+
 func (list *LinkedList) FromArray(array []int) {
 	currentNode := list.Head
 	for _, el := range array {
@@ -63,8 +67,30 @@ func (list *LinkedList) Sort() {
 	}
 }
 
-func (list *LinkedList) Insert(element int, position int) {
-	panic("NOT IMPLEMENTED")
+func (list *LinkedList) Insert(element int, position int) error {
+	node := &Node{data: element, next: nil}
+	if position == 0 {
+		if list.length == 0 {
+			list.Head = node
+		} else {
+			node.next = list.Head
+			list.Head = node
+		}
+	} else if position > 0 {
+		if position > list.length {
+			return fmt.Errorf("out of bound error, position %d is greater than list length %d", position, list.length)
+		}
+		var preceding *Node
+		current := list.Head
+		for i := 0; i < position+1; i++ {
+			preceding = current
+			current = current.next
+		}
+		preceding.next = node
+		node.next = current
+	}
+	return nil
+
 }
 func (list *LinkedList) Delete(element int, occurence int) bool {
 	panic("NOT IMPLEMENTED")
