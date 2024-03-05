@@ -9,27 +9,27 @@ import (
 const nodeTemplate = "Node(%v)"
 const arrow = " --> "
 
-type Node struct {
+type listNode struct {
 	data int
-	next *Node
+	next *listNode
 }
 
 type LinkedList struct {
-	Head   *Node
+	head   *listNode
 	length int
 }
 
 type LinkedListIterator struct {
 	list    LinkedList
-	current *Node
+	current *listNode
 }
 
-func (node Node) String() string {
+func (node listNode) String() string {
 	return fmt.Sprintf(nodeTemplate, node.data)
 }
-func New() *LinkedList {
-	head := Node{}
-	return &LinkedList{Head: &head, length: 0}
+func NewLinkedList() *LinkedList {
+	head := listNode{}
+	return &LinkedList{head: &head, length: 0}
 }
 func (listIterator *LinkedListIterator) HasNext() bool {
 	return listIterator.current.next != nil
@@ -38,13 +38,13 @@ func (listIterator *LinkedListIterator) next() {
 	listIterator.current = listIterator.current.next
 }
 
-func (listIterator *LinkedListIterator) GetNext() *Node {
+func (listIterator *LinkedListIterator) GetNext() *listNode {
 	defer listIterator.next()
 	return listIterator.current
 }
 
 func (list LinkedList) Iterator() *LinkedListIterator {
-	return &LinkedListIterator{list: list, current: list.Head}
+	return &LinkedListIterator{list: list, current: list.head}
 }
 
 func (list LinkedList) String() string {

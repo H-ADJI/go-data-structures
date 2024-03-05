@@ -6,10 +6,10 @@ import (
 )
 
 func (list *LinkedList) FromArray(array []int) {
-	currentNode := list.Head
+	currentNode := list.head
 	for _, el := range array {
 		currentNode.data = el
-		currentNode.next = new(Node)
+		currentNode.next = new(listNode)
 		list.length++
 		currentNode = currentNode.next
 	}
@@ -27,7 +27,7 @@ func (list *LinkedList) Search(element int) bool {
 	if list.length == 0 {
 		return false
 	}
-	current := list.Head
+	current := list.head
 	for current != nil {
 		if current.data == element {
 			return true
@@ -37,7 +37,7 @@ func (list *LinkedList) Search(element int) bool {
 	return false
 }
 
-func (node *Node) Swap(preceding *Node, following *Node) {
+func (node *listNode) Swap(preceding *listNode, following *listNode) {
 	if preceding == nil {
 		node.next = following.next
 		following.next = node
@@ -50,8 +50,8 @@ func (node *Node) Swap(preceding *Node, following *Node) {
 
 func (list *LinkedList) Sort() {
 	for i := 0; i < list.length; i++ {
-		var preceding *Node = nil
-		current := list.Head
+		var preceding *listNode = nil
+		current := list.head
 		for j := 0; j < list.length-i-1; j++ {
 			following := current.next
 			if current.data > following.data {
@@ -68,20 +68,20 @@ func (list *LinkedList) Sort() {
 }
 
 func (list *LinkedList) Insert(element int, position int) error {
-	node := &Node{data: element, next: nil}
+	node := &listNode{data: element, next: nil}
 	if position == 0 {
 		if list.length == 0 {
-			list.Head = node
+			list.head = node
 		} else {
-			node.next = list.Head
-			list.Head = node
+			node.next = list.head
+			list.head = node
 		}
 	} else if position > 0 {
 		if position > list.length {
 			return fmt.Errorf("out of bound error, position %d is greater than list length %d", position, list.length)
 		}
-		var preceding *Node
-		current := list.Head
+		var preceding *listNode
+		current := list.head
 		for i := 0; i < position+1; i++ {
 			preceding = current
 			current = current.next
@@ -93,12 +93,12 @@ func (list *LinkedList) Insert(element int, position int) error {
 
 }
 func (list *LinkedList) Delete(element int) bool {
-	var preceding *Node
+	var preceding *listNode
 	iterator := list.Iterator()
 	for iterator.HasNext() {
 		current := iterator.GetNext()
-		if list.Head.data == element {
-			list.Head = list.Head.next
+		if list.head.data == element {
+			list.head = list.head.next
 			return true
 		} else if current.data == element {
 			preceding.next = current.next

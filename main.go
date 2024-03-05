@@ -10,7 +10,7 @@ const Hello = "lol"
 
 func main() {
 	array := []int{1, 2, 1}
-	list := linkedList.New()
+	list := linkedList.NewLinkedList()
 	list.FromArray(array)
 	list.Delete(1)
 	fmt.Println(list)

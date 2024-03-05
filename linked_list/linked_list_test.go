@@ -1,13 +1,11 @@
-package linked_list_test
+package linked_list
 
 import (
 	"testing"
-
-	linkedList "github.com/H-ADJI/go-data-structures/linked_list"
 )
 
 func TestNew(t *testing.T) {
-	list := linkedList.New()
+	list := NewLinkedList()
 	if list == nil {
 		t.Fatalf(`Wanted non-nil pointer for linked list, got %p pointer`, list)
 	}
@@ -17,7 +15,7 @@ func TestNew(t *testing.T) {
 }
 func TestSwap(t *testing.T) {
 	array := []int{1, 2, 3, 4}
-	list := linkedList.New()
+	list := NewLinkedList()
 	list.FromArray(array)
 	if list == nil {
 		t.Fatalf(`Wanted non-nil pointer for linked list, got %p pointer`, list)
@@ -39,7 +37,7 @@ func TestSwap(t *testing.T) {
 }
 func TestFromArray(t *testing.T) {
 	array := []int{2, 3, 5, 3, 2, 1, 6, 9, 4, 232, 43, 2, 0}
-	list := linkedList.New()
+	list := NewLinkedList()
 	list.FromArray(array)
 	for _, element := range array {
 		if !list.Search(element) {
@@ -49,14 +47,14 @@ func TestFromArray(t *testing.T) {
 }
 
 func TestSearch(t *testing.T) {
-	list := linkedList.New()
+	list := NewLinkedList()
 	if list.Search(0) {
 		t.Fatalf(`List should be emnpty`)
 	}
 }
 func TestSort(t *testing.T) {
 	array := []int{1, 2, 3, 4}
-	list := linkedList.New()
+	list := NewLinkedList()
 	list.FromArray(array)
 	list.Sort()
 	arrayExpected := []int{1, 2, 3, 4}
@@ -67,7 +65,7 @@ func TestSort(t *testing.T) {
 
 	}
 	array = []int{1, 3, 2, 4}
-	list = linkedList.New()
+	list = NewLinkedList()
 	list.FromArray(array)
 	list.Sort()
 	arrayExpected = []int{1, 2, 3, 4}
@@ -81,7 +79,7 @@ func TestSort(t *testing.T) {
 }
 func TestInsert(t *testing.T) {
 	array := []int{2, 3, 5, 3, 2, 1, 6, 9, 4, 232, 43, 2, 0}
-	list := linkedList.New()
+	list := NewLinkedList()
 	list.FromArray(array)
 	err := list.Insert(99, 88)
 	if err == nil {
@@ -91,7 +89,7 @@ func TestInsert(t *testing.T) {
 	if err != nil {
 		t.Fatalf("element 99 should be the first element of the list but we got \n %v", list)
 	}
-	modifiedList := linkedList.New()
+	modifiedList := NewLinkedList()
 	modifiedArray := []int{99, 2, 3, 5, 3, 2, 1, 6, 9, 4, 232, 43, 2, 0}
 	modifiedList.FromArray(modifiedArray)
 	err = modifiedList.Insert(99, 0)
