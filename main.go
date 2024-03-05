@@ -9,9 +9,9 @@ import (
 const Hello = "lol"
 
 func main() {
-	array := []int{1, 3, 2, 4}
+	array := []int{1, 2, 1}
 	list := linkedList.New()
 	list.FromArray(array)
-	list.Sort()
+	list.Delete(1)
 	fmt.Println(list)
 }

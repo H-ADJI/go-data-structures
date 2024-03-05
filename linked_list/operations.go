@@ -92,6 +92,19 @@ func (list *LinkedList) Insert(element int, position int) error {
 	return nil
 
 }
-func (list *LinkedList) Delete(element int, occurence int) bool {
-	panic("NOT IMPLEMENTED")
+func (list *LinkedList) Delete(element int) bool {
+	var preceding *Node
+	iterator := list.Iterator()
+	for iterator.HasNext() {
+		current := iterator.GetNext()
+		if list.Head.data == element {
+			list.Head = list.Head.next
+			return true
+		} else if current.data == element {
+			preceding.next = current.next
+			return true
+		}
+		preceding = current
+	}
+	return false
 }
