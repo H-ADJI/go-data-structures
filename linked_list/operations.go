@@ -100,10 +100,7 @@ func (list *LinkedList) Delete(element int) bool {
 	iterator := list.Iterator()
 	for iterator.HasNext() {
 		current := iterator.GetNext()
-		if list.head.data == element {
-			list.head = list.head.next
-			return true
-		} else if current.data == element {
+		if current.data == element {
 			preceding.next = current.next
 			return true
 		}

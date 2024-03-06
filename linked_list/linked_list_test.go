@@ -44,6 +44,21 @@ func TestToArray(t *testing.T) {
 		t.Fatalf("Both arrays should be equal but got : \noriginal array : %v \nresulting array : %v", array, list.ToArray())
 	}
 }
+
+func TestSearch(t *testing.T) {
+	array := []int{2, 3, 5, 3, 2, 1, 6, 9, 4, 232, 43, 2, 0}
+	list := NewLinkedList()
+	if list.Search(0) {
+		t.Fatalf(`List should be emnpty`)
+	}
+	list.FromArray(array)
+	if list.Search(22) {
+		t.Fatalf("List shouldn't contain : %v", 22)
+	}
+	if !list.Search(232) {
+		t.Fatalf("List should contain : %v, but not found", 232)
+	}
+}
 func TestSwap(t *testing.T) {
 	array := []int{1, 2, 3, 4}
 	list := NewLinkedList()
@@ -60,19 +75,11 @@ func TestSwap(t *testing.T) {
 	}
 	arrayExpected := []int{1, 3, 2, 4}
 	array = list.ToArray()
-	for i := range arrayExpected {
-		if array[i] != arrayExpected[i] {
-			t.Fatalf("\nexpected ->> %v \nbut got ->> %v", arrayExpected, array)
-		}
+	if !compareSlice(array, arrayExpected) {
+		t.Fatalf("\nexpected ->> %v \nbut got ->> %v", arrayExpected, array)
 	}
 }
 
-func TestSearch(t *testing.T) {
-	list := NewLinkedList()
-	if list.Search(0) {
-		t.Fatalf(`List should be emnpty`)
-	}
-}
 func TestSort(t *testing.T) {
 	array := []int{1, 2, 3, 4}
 	list := NewLinkedList()
@@ -91,11 +98,8 @@ func TestSort(t *testing.T) {
 	list.Sort()
 	arrayExpected = []int{1, 2, 3, 4}
 	array = list.ToArray()
-	for i := range arrayExpected {
-		if array[i] != arrayExpected[i] {
-			t.Fatalf("\nexpected ->> %v \nbut got ->> %v", arrayExpected, array)
-		}
-
+	if !compareSlice(array, arrayExpected) {
+		t.Fatalf("\nexpected ->> %v \nbut got ->> %v", arrayExpected, array)
 	}
 }
 func TestInsert(t *testing.T) {
@@ -118,11 +122,8 @@ func TestInsert(t *testing.T) {
 		t.Fatalf("could not insert into list")
 	}
 	arrayExpected := list.ToArray()
-	for i := range arrayExpected {
-		if modifiedArray[i] != arrayExpected[i] {
-			t.Fatalf("\nexpected ->> %v \nbut got ->> %v", arrayExpected, modifiedArray)
-		}
-
+	if !compareSlice(modifiedArray, arrayExpected) {
+		t.Fatalf("\nexpected ->> %v \nbut got ->> %v", arrayExpected, array)
 	}
 
 }
