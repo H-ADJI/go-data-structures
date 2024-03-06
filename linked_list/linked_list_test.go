@@ -4,7 +4,8 @@ import (
 	"testing"
 )
 
-func compareSlice(slice1 []int, slice2 []int) bool {
+func compareSlice(t *testing.T, slice1 []int, slice2 []int) bool {
+	t.Helper()
 	if len(slice1) != len(slice2) {
 		return false
 	}
@@ -40,7 +41,7 @@ func TestToArray(t *testing.T) {
 	array := []int{2, 3, 5, 3, 2}
 	list := NewLinkedList()
 	list.FromArray(array)
-	if !compareSlice(array, list.ToArray()) {
+	if !compareSlice(t, array, list.ToArray()) {
 		t.Fatalf("Both arrays should be equal but got : \noriginal array : %v \nresulting array : %v", array, list.ToArray())
 	}
 }
@@ -75,7 +76,7 @@ func TestSwap(t *testing.T) {
 	}
 	arrayExpected := []int{1, 3, 2, 4}
 	array = list.ToArray()
-	if !compareSlice(array, arrayExpected) {
+	if !compareSlice(t, array, arrayExpected) {
 		t.Fatalf("\nexpected ->> %v \nbut got ->> %v", arrayExpected, array)
 	}
 }
@@ -98,7 +99,7 @@ func TestSort(t *testing.T) {
 	list.Sort()
 	arrayExpected = []int{1, 2, 3, 4}
 	array = list.ToArray()
-	if !compareSlice(array, arrayExpected) {
+	if !compareSlice(t, array, arrayExpected) {
 		t.Fatalf("\nexpected ->> %v \nbut got ->> %v", arrayExpected, array)
 	}
 }
@@ -122,7 +123,7 @@ func TestInsert(t *testing.T) {
 		t.Fatalf("could not insert into list")
 	}
 	arrayExpected := list.ToArray()
-	if !compareSlice(modifiedArray, arrayExpected) {
+	if !compareSlice(t, modifiedArray, arrayExpected) {
 		t.Fatalf("\nexpected ->> %v \nbut got ->> %v", arrayExpected, array)
 	}
 
