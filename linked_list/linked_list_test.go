@@ -61,11 +61,29 @@ func TestFromArray(t *testing.T) {
 }
 
 func TestToArray(t *testing.T) {
-	array := []int{2, 3, 5, 3, 2}
+	testCases := []struct {
+		sourceArray []int
+		outputArray []int
+		equal       bool
+	}{
+		{[]int{1, 2, 3, 4, 1, 5, 5}, []int{1, 2, 3, 4, 1, 5, 5}, true},
+		{[]int{5, 5, 5, 5, 1, 5, 5}, []int{}, false},
+		{[]int{5, 5, 5, 5, 1, 5, 5}, []int{5, 1, 5, 5}, false},
+		{[]int{}, []int{}, true},
+		{[]int{0}, []int{0}, true},
+		{[]int{}, []int{0}, true},
+	}
+
 	list := NewLinkedList()
-	list.FromArray(array)
-	if !compareSlice(t, array, list.ToArray()) {
-		t.Fatalf("Both arrays should be equal but got : \noriginal array : %v \nresulting array : %v", array, list.ToArray())
+	for _, tc := range testCases {
+		list.FromArray(tc.sourceArray)
+		if compareSlice(t, tc.outputArray, list.ToArray()) != tc.equal {
+			if tc.equal {
+				t.Fatalf("Expected to be different \nsource: %v, \noutput: %v", tc.sourceArray, tc.outputArray)
+			} else {
+				t.Fatalf("Expected to be equal \nsource: %v, \noutput: %v", tc.sourceArray, tc.outputArray)
+			}
+		}
 	}
 }
 

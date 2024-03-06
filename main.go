@@ -9,7 +9,7 @@ import (
 const Hello = "lol"
 
 func main() {
-	array := []int{1, 2, 1}
+	array := []int{1}
 	list := linkedList.NewLinkedList()
 	list.FromArray(array)
 	list.Delete(1)

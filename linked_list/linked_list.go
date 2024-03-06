@@ -20,7 +20,7 @@ type LinkedList struct {
 }
 
 type LinkedListIterator struct {
-	list    LinkedList
+	list    *LinkedList
 	current *listNode
 }
 
@@ -31,20 +31,29 @@ func NewLinkedList() *LinkedList {
 	head := listNode{}
 	return &LinkedList{head: &head, length: 0}
 }
+
+func (list *LinkedList) Iterator() *LinkedListIterator {
+	return &LinkedListIterator{list: list, current: list.head}
+}
+
 func (listIterator *LinkedListIterator) HasNext() bool {
-	return listIterator.current.next != nil
+	if listIterator.list.length == 0 {
+		return false
+	}
+	if listIterator.current == listIterator.list.head {
+		return true
+	}
+	return listIterator.current != nil
 }
 func (listIterator *LinkedListIterator) next() {
+
 	listIterator.current = listIterator.current.next
+
 }
 
 func (listIterator *LinkedListIterator) GetNext() *listNode {
 	defer listIterator.next()
 	return listIterator.current
-}
-
-func (list LinkedList) Iterator() *LinkedListIterator {
-	return &LinkedListIterator{list: list, current: list.head}
 }
 
 func (list LinkedList) String() string {

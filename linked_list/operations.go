@@ -10,11 +10,15 @@ func (list *LinkedList) FromArray(array []int) {
 	list.head = new(listNode)
 	list.length = 0
 	currentNode := list.head
+	var previous *listNode
 	for _, el := range array {
+		if previous != nil {
+			currentNode = new(listNode)
+			previous.next = currentNode
+		}
 		currentNode.data = el
-		currentNode.next = new(listNode)
 		list.length++
-		currentNode = currentNode.next
+		previous = currentNode
 	}
 }
 
@@ -102,6 +106,7 @@ func (list *LinkedList) Delete(element int) bool {
 	iterator := list.Iterator()
 	for iterator.HasNext() {
 		current := iterator.GetNext()
+		// TODO: handle case when first element is removed so we have no preceding element and decrease length
 		if current.data == element {
 			preceding.next = current.next
 			return true
