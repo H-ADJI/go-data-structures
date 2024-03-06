@@ -5,8 +5,10 @@ import (
 	"fmt"
 )
 
-// Initialize a linked list elements using a slice
+// re-Initialize a linked list elements using a slice
 func (list *LinkedList) FromArray(array []int) {
+	list.head = new(listNode)
+	list.length = 0
 	currentNode := list.head
 	for _, el := range array {
 		currentNode.data = el

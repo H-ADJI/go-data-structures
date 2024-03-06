@@ -36,12 +36,26 @@ func TestNewLinkedlist(t *testing.T) {
 }
 
 func TestFromArray(t *testing.T) {
-	array := []int{2, 3, 5, 3, 2, 1, 6, 9, 4, 232, 43, 2, 0}
+	testCases := []struct {
+		sourceArray   []int
+		hasElement    int
+		hasnotElement int
+	}{
+		{[]int{5, 5, 5, 5, 1, 5, 5}, 5, 4},
+		{[]int{5, 5, 5, 5, 5, 5, 2}, 2, 1},
+		{[]int{}, 4, 5},
+	}
+
 	list := NewLinkedList()
-	list.FromArray(array)
-	for _, element := range array {
-		if !list.Search(element) {
-			t.Fatalf("Element %v should be in the list", element)
+	for _, tc := range testCases {
+		list.FromArray(tc.sourceArray)
+		if !list.Search(tc.hasElement) {
+			if list.length != 0 {
+				t.Fatalf("List %v should contain %v", list, tc.hasElement)
+			}
+		}
+		if list.Search(tc.hasnotElement) {
+			t.Fatalf("List %v shouldn't contain %v", list, tc.hasElement)
 		}
 	}
 }
