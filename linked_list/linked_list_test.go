@@ -1,6 +1,7 @@
 package linked_list
 
 import (
+	"fmt"
 	"testing"
 )
 
@@ -16,13 +17,21 @@ func compareSlice(t *testing.T, slice1 []int, slice2 []int) bool {
 	}
 	return true
 }
-func TestNew(t *testing.T) {
+func TestNewLinkedlist(t *testing.T) {
+
 	list := NewLinkedList()
-	if list == nil {
-		t.Fatalf(`Wanted non-nil pointer for linked list, got %p pointer`, list)
+	testCases := []struct {
+		name          string
+		expectedState bool
+	}{
+		{name: fmt.Sprintf("New List shouldn't be of length %v", list.length), expectedState: list.length == 0},
+		{name: "List head shouldn't be nil", expectedState: list.head != nil},
+		{name: "List shouldn't be nil", expectedState: list != nil},
 	}
-	if list == nil {
-		t.Fatalf(`Wanted non-nil pointer for linked list, got %p pointer`, list)
+	for _, tc := range testCases {
+		if !tc.expectedState {
+			t.Fatal(tc.name)
+		}
 	}
 }
 
