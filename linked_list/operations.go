@@ -106,9 +106,14 @@ func (list *LinkedList) Delete(element int) bool {
 	iterator := list.Iterator()
 	for iterator.HasNext() {
 		current := iterator.GetNext()
-		// TODO: handle case when first element is removed so we have no preceding element and decrease length
 		if current.data == element {
-			preceding.next = current.next
+			if current == list.head {
+				list.head = &listNode{}
+				list.length--
+			} else {
+				preceding.next = current.next
+				list.length--
+			}
 			return true
 		}
 		preceding = current

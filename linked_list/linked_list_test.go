@@ -71,7 +71,7 @@ func TestToArray(t *testing.T) {
 		{[]int{5, 5, 5, 5, 1, 5, 5}, []int{5, 1, 5, 5}, false},
 		{[]int{}, []int{}, true},
 		{[]int{0}, []int{0}, true},
-		{[]int{}, []int{0}, true},
+		{[]int{}, []int{0}, false},
 	}
 
 	list := NewLinkedList()
