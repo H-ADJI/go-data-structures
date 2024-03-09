@@ -33,15 +33,12 @@ func (list *LinkedList) ToArray() []int {
 }
 
 func (list *LinkedList) Search(element int) bool {
-	if list.length == 0 {
-		return false
-	}
-	current := list.head
-	for current != nil {
+	iterator := list.Iterator()
+	for iterator.HasNext() {
+		current := iterator.GetNext()
 		if current.data == element {
 			return true
 		}
-		current = current.next
 	}
 	return false
 }

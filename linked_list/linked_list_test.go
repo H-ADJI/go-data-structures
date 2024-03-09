@@ -88,18 +88,31 @@ func TestToArray(t *testing.T) {
 }
 
 func TestSearch(t *testing.T) {
-	array := []int{2, 3, 5, 3, 2, 1, 6, 9, 4, 232, 43, 2, 0}
+	testCases := []struct {
+		element     int
+		sourceArray []int
+		in          bool
+	}{
+		{1, []int{1, 2, 3, 4, 1, 5, 5}, true},
+		{0, []int{}, false},
+		{0, []int{0}, true},
+		{22, []int{5, 5}, false},
+		{22, []int{22}, true},
+		{42, []int{}, false},
+		{360, []int{0}, false},
+	}
 	list := NewLinkedList()
-	if list.Search(0) {
-		t.Fatalf(`List should be emnpty`)
+	for _, tc := range testCases {
+		list.FromArray(tc.sourceArray)
+		if list.Search(tc.element) != tc.in {
+			if tc.in {
+				t.Fatalf("Expected to find the element: %v, in: %v", tc.element, tc.sourceArray)
+			} else {
+				t.Fatalf("Expected to not find the element: %v, in: %v", tc.element, tc.sourceArray)
+			}
+		}
 	}
-	list.FromArray(array)
-	if list.Search(22) {
-		t.Fatalf("List shouldn't contain : %v", 22)
-	}
-	if !list.Search(232) {
-		t.Fatalf("List should contain : %v, but not found", 232)
-	}
+
 }
 func TestSwap(t *testing.T) {
 	array := []int{1, 2, 3, 4}
