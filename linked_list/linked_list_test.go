@@ -126,7 +126,7 @@ func TestSwap(t *testing.T) {
 		preceding := iterator.GetNext()
 		current := iterator.GetNext()
 		following := iterator.GetNext()
-		current.Swap(preceding, following)
+		current.swap(preceding, following)
 	}
 	arrayExpected := []int{1, 3, 2, 4}
 	array = list.ToArray()

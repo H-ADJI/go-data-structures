@@ -43,7 +43,7 @@ func (list *LinkedList) Search(element int) bool {
 	return false
 }
 
-func (node *listNode) Swap(preceding *listNode, following *listNode) {
+func (node *listNode) swap(preceding *listNode, following *listNode) {
 	if preceding == nil {
 		node.next = following.next
 		following.next = node
@@ -62,7 +62,7 @@ func (list *LinkedList) Sort() {
 			following := current.next
 			if current.data > following.data {
 				// swaping current and following node order
-				current.Swap(preceding, following)
+				current.swap(preceding, following)
 				preceding = following
 			} else {
 				preceding = current
