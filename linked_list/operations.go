@@ -43,6 +43,7 @@ func (list *LinkedList) Search(element int) bool {
 	return false
 }
 
+// Swaps current node with following node
 func (node *listNode) swap(preceding *listNode, following *listNode) {
 	if preceding == nil {
 		node.next = following.next

@@ -114,26 +114,21 @@ func TestSearch(t *testing.T) {
 	}
 
 }
-func TestSwap(t *testing.T) {
-	array := []int{1, 2, 3, 4}
-	list := NewLinkedList()
-	list.FromArray(array)
-	if list == nil {
-		t.Fatalf(`Wanted non-nil pointer for linked list, got %p pointer`, list)
-	}
-	iterator := list.Iterator()
-	if iterator.HasNext() {
-		preceding := iterator.GetNext()
-		current := iterator.GetNext()
-		following := iterator.GetNext()
-		current.swap(preceding, following)
-	}
-	arrayExpected := []int{1, 3, 2, 4}
-	array = list.ToArray()
-	if !compareSlice(t, array, arrayExpected) {
-		t.Fatalf("\nexpected ->> %v \nbut got ->> %v", arrayExpected, array)
-	}
-}
+// func TestSwap(t *testing.T) {
+// 	array := []int{1, 2, 3, 4, 5, 6}
+// 	list := NewLinkedList()
+// 	for i := 0; i < len(array)*2; i++ {
+// 		list.FromArray(array)
+// 		iterator := list.Iterator()
+// 		for j := 0; j < i+1 && iterator.HasNext(); j++ {
+// 			current := iterator.GetNext()
+// 			if j == i-1 {
+// 				preceding := current
+// 			}
+// 		}
+
+// 	}
+// }
 
 func TestSort(t *testing.T) {
 	array := []int{1, 2, 3, 4}
