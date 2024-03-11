@@ -43,34 +43,17 @@ func (list *LinkedList) Search(element int) bool {
 	return false
 }
 
-// Swaps current node with following node
-func (node *listNode) swap(preceding *listNode, following *listNode) {
-	if preceding == nil {
-		node.next = following.next
-		following.next = node
-	} else {
-		node.next = following.next
-		following.next = node
-		preceding.next = following
-	}
-}
-
+// TODO: Refactor swap and sort to act on listNode.data and not the listNode ptr<
 func (list *LinkedList) Sort() {
 	for i := 0; i < list.length; i++ {
-		var preceding *listNode = nil
-		current := list.head
+		iterator := list.Iterator()
 		for j := 0; j < list.length-i-1; j++ {
-			following := current.next
-			if current.data > following.data {
-				// swaping current and following node order
-				current.swap(preceding, following)
-				preceding = following
-			} else {
-				preceding = current
-				current = following
+			current := iterator.GetNext()
+			next := current.next
+			if current.data > next.data {
+				current.data, next.data = next.data, current.data
 			}
 		}
-
 	}
 }
 

@@ -1,17 +1,15 @@
 package main
 
-import (
-	"fmt"
-
-	linkedList "github.com/H-ADJI/go-data-structures/linked_list"
-)
-
-const Hello = "lol"
+import "fmt"
 
 func main() {
-	array := []int{1, 2}
-	list := linkedList.NewLinkedList()
-	list.FromArray(array)
-	fmt.Println(list.Search(1))
-	fmt.Println(list)
+	hey := "i am happy 😊"
+	fmt.Println(len(hey))
+	fmt.Println(len([]rune(hey)))
+
+	for i, v := range hey {
+		fmt.Println(i)
+		fmt.Printf("%c, %d, %X, %U\n", v, v, v, v)
+
+	}
 }

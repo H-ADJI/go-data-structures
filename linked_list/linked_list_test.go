@@ -114,42 +114,27 @@ func TestSearch(t *testing.T) {
 	}
 
 }
-// func TestSwap(t *testing.T) {
-// 	array := []int{1, 2, 3, 4, 5, 6}
-// 	list := NewLinkedList()
-// 	for i := 0; i < len(array)*2; i++ {
-// 		list.FromArray(array)
-// 		iterator := list.Iterator()
-// 		for j := 0; j < i+1 && iterator.HasNext(); j++ {
-// 			current := iterator.GetNext()
-// 			if j == i-1 {
-// 				preceding := current
-// 			}
-// 		}
-
-// 	}
-// }
 
 func TestSort(t *testing.T) {
-	array := []int{1, 2, 3, 4}
-	list := NewLinkedList()
-	list.FromArray(array)
-	list.Sort()
-	arrayExpected := []int{1, 2, 3, 4}
-	for i := range arrayExpected {
-		if array[i] != arrayExpected[i] {
-			t.Fatalf("\nexpected ->> %v \nbut got ->> %v", arrayExpected, array)
-		}
-
+	testCases := []struct {
+		inputArray  []int
+		outputArray []int
+	}{
+		{[]int{2, 5, 4, 4, 99, 6}, []int{2, 4, 4, 5, 6, 99}},
+		{[]int{99, 5, 4, 4, 2, 6}, []int{2, 4, 4, 5, 6, 99}},
+		{[]int{}, []int{}},
+		{[]int{9}, []int{9}},
+		{[]int{9, 1}, []int{1, 9}},
 	}
-	array = []int{1, 3, 2, 4}
-	list = NewLinkedList()
-	list.FromArray(array)
-	list.Sort()
-	arrayExpected = []int{1, 2, 3, 4}
-	array = list.ToArray()
-	if !compareSlice(t, array, arrayExpected) {
-		t.Fatalf("\nexpected ->> %v \nbut got ->> %v", arrayExpected, array)
+	list := NewLinkedList()
+	for _, tc := range testCases {
+		list.FromArray(tc.inputArray)
+		list.Sort()
+		if !compareSlice(t, list.ToArray(), tc.outputArray) {
+			expected := NewLinkedList()
+			expected.FromArray(tc.outputArray)
+			t.Fatalf("\nExpected: %v \n but got: %v", expected, list)
+		}
 	}
 }
 func TestInsert(t *testing.T) {
