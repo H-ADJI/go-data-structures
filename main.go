@@ -1,15 +1,22 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+
+	"github.com/H-ADJI/go-data-structures/queue"
+)
 
 func main() {
-	hey := "i am happy 😊"
-	fmt.Println(len(hey))
-	fmt.Println(len([]rune(hey)))
+	q := queue.NewQueue(5)
+	q.Enqueue(1)
+	q.Enqueue(2)
+	fmt.Println(q)
+	q.Dequeue()
+	q.Enqueue(3)
+	fmt.Println(q)
+	q.Dequeue()
+	q.Enqueue(4)
+	q.Enqueue(5)
 
-	for i, v := range hey {
-		fmt.Println(i)
-		fmt.Printf("%c, %d, %X, %U\n", v, v, v, v)
-
-	}
+	fmt.Println(q)
 }
