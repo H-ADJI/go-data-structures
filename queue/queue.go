@@ -75,5 +75,5 @@ func (*Queue) Peek() {
 
 }
 func (q *Queue) String() string {
-	return fmt.Sprint(q.buffer[q.front:q.rear+1])
+	return fmt.Sprint(q.buffer[q.front : q.rear+1])
 }
