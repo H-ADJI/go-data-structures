@@ -14,20 +14,21 @@ type Queue struct {
 
 func NewQueue(capacity int) *Queue {
 	queue := new(Queue)
-	if capacity > 0 {
-		buffer := make([]int, capacity)
-		queue.buffer = buffer
-		queue.capacity = capacity
-	} else {
-		queue.capacity = -1
-	}
-
+	buffer := make([]int, capacity)
+	queue.buffer = buffer
+	queue.capacity = capacity
 	queue.front = -1
 	queue.rear = -1
 
 	return queue
 }
-
+func (q *Queue) Populate(elements []int) error {
+	var err error = nil
+	for _, el := range elements {
+		err = q.Enqueue(el)
+	}
+	return err
+}
 func (q *Queue) Enqueue(element int) error {
 	if q.IsFull() {
 		return errors.New("queue is full")
@@ -65,10 +66,7 @@ func (q *Queue) IsEmpty() bool {
 }
 
 func (q *Queue) IsFull() bool {
-	if q.front == 0 && q.rear-q.front == q.capacity-1 {
-		return true
-	}
-	return false
+	return q.rear-q.front+1 == q.capacity
 
 }
 func (*Queue) Peek() {
