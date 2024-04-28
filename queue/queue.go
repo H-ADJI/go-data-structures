@@ -69,8 +69,8 @@ func (q *Queue) IsFull() bool {
 	return q.rear-q.front+1 == q.capacity
 
 }
-func (*Queue) Peek() {
-
+func (*Queue) Peek() (int, error) {
+	return 0, errors.New("queue is empty")
 }
 func (q *Queue) String() string {
 	return fmt.Sprint(q.buffer[q.front : q.rear+1])
