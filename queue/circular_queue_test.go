@@ -4,27 +4,23 @@ import (
 	"testing"
 )
 
-// func TestCicularQueueIsFull(t *testing.T) {
+func TestCicularQueueIsFull(t *testing.T) {
+	testCases := []struct {
+		q      CircularQueue
+		isFull bool
+	}{
+		{CircularQueue{buffer: [10]int{}, front: -1, rear: -1}, false},
+		{CircularQueue{buffer: [10]int{1, 2, 3, 4}, front: 0, rear: 9}, true},
+		{CircularQueue{buffer: [10]int{1, 2, 3, 4}, front: 2, rear: 1}, true},
+		{CircularQueue{buffer: [10]int{1, 2, 3, 4}, front: 5, rear: 2}, false},
+	}
+	for _, tc := range testCases {
+		if tc.q.IsFull() != tc.isFull {
+			t.Fatalf("isEmpty should be %v but got %v", tc.isFull, tc.q.IsFull())
 
-// testCases := []struct {
-// 	buffer [QueueCapacity]int
-
-// 	isFull bool
-// }{
-// 	{[QueueCapacity]int{1, 2, 3, 4, 5}, false},
-// 	{[QueueCapacity]int{1, 2, 3, 4, 5, 5}, false},
-// 	{[QueueCapacity]int{1, 2, 3, 4, 5, 5, 6, 7, 8, 9}, true},
-// 	{[QueueCapacity]int{}, false},
-// }
-// for _, tc := range testCases {
-// 	q := CircularQueue{}
-// 	q.buffer = tc.buffer
-// 	if q.IsFull() != tc.isFull {
-// 		t.Fatalf("isFull should be %v but got %v", tc.isFull, q.IsFull())
-
-// 	}
-// }
-// }
+		}
+	}
+}
 
 func TestCicularQueueIsEmpty(t *testing.T) {
 	testCases := []struct {

@@ -16,7 +16,12 @@ func (q CircularQueue) Dequeue() (int, error) {
 	}
 
 	e := q.buffer[q.front]
-	q.front = (q.front + 1) % (QueueCapacity - 1)
+	if q.front == q.rear {
+		q.front = -1
+		q.rear = -1
+	} else {
+		q.front = (q.front + 1) % (QueueCapacity - 1)
+	}
 	return e, nil
 }
 
