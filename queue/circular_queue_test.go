@@ -81,5 +81,25 @@ func TestCircularEnqueue(t *testing.T) {
 	}
 }
 
-// func TestCircularDequeue(t *testing.T) {
-// }
+func TestCircularDequeue(t *testing.T) {
+	testCases := []struct {
+		q           CircularQueue
+		shouldError bool
+	}{
+		{CircularQueue{buffer: [10]int{}, front: -1, rear: -1}, true},
+		{CircularQueue{buffer: [10]int{1, 2, 3, 4}, front: 0, rear: 0}, false},
+		{CircularQueue{buffer: [10]int{1, 2, 3, 4}, front: -1, rear: -1}, true},
+		{CircularQueue{buffer: [10]int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, front: 5, rear: 4}, false},
+		{CircularQueue{buffer: [10]int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, front: 2, rear: 2}, false},
+		{CircularQueue{buffer: [10]int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, front: 0, rear: 9}, false},
+	}
+	for i, tc := range testCases {
+		_, err := tc.q.Dequeue()
+		if err == nil {
+			if tc.shouldError {
+				t.Fatalf("Test Case[%d] : enqueueing into %v shouldn't be possible", i, tc.q)
+			}
+
+		}
+	}
+}
