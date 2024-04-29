@@ -16,7 +16,7 @@ func TestCicularQueueIsFull(t *testing.T) {
 	}
 	for _, tc := range testCases {
 		if tc.q.IsFull() != tc.isFull {
-			t.Fatalf("isEmpty should be %v but got %v", tc.isFull, tc.q.IsFull())
+			t.Fatalf("isFull should be %v but got %v", tc.isFull, tc.q.IsFull())
 
 		}
 	}
@@ -58,7 +58,28 @@ func TestCicularQueueOccupiedSpace(t *testing.T) {
 	}
 }
 
-// func TestCircularEnqueue(t *testing.T) {
-// }
+func TestCircularEnqueue(t *testing.T) {
+	testCases := []struct {
+		q           CircularQueue
+		shouldError bool
+	}{
+		{CircularQueue{buffer: [10]int{}, front: -1, rear: -1}, false},
+		{CircularQueue{buffer: [10]int{1, 2, 3, 4}, front: 0, rear: 3}, false},
+		{CircularQueue{buffer: [10]int{1, 2, 3, 4}, front: -1, rear: -1}, false},
+		{CircularQueue{buffer: [10]int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, front: 5, rear: 4}, true},
+		{CircularQueue{buffer: [10]int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, front: 5, rear: 2}, false},
+		{CircularQueue{buffer: [10]int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, front: 0, rear: 9}, true},
+	}
+	for i, tc := range testCases {
+		err := tc.q.Enqueue(1)
+		if err == nil {
+			if tc.shouldError {
+				t.Fatalf("Test Case[%d] : enqueueing into %v shouldn't be possible", i, tc.q)
+			}
+
+		}
+	}
+}
+
 // func TestCircularDequeue(t *testing.T) {
 // }
