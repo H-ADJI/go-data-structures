@@ -10,6 +10,13 @@ type CircularQueue struct {
 	rear   int
 }
 
+func NewCircularQueue(capacity int) *CircularQueue {
+	queue := new(CircularQueue)
+	queue.front = -1
+	queue.rear = -1
+	return queue
+}
+
 func (q CircularQueue) Dequeue() (int, error) {
 	if q.IsEmpty() {
 		return 0, errors.New("the queue is empty")
