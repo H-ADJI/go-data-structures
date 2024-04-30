@@ -15,7 +15,7 @@ func NewStack() *Stack {
 	return stack
 }
 func (s *Stack) Push(el int) error {
-	if s.isFull() {
+	if s.IsFull() {
 		return errors.New("the stack is full")
 	}
 	s.index++
@@ -32,7 +32,7 @@ func (s *Stack) Pop() (int, error) {
 	return el, nil
 }
 
-func (s *Stack) isFull() bool {
+func (s *Stack) IsFull() bool {
 	return s.index == stackSize-1
 }
 
