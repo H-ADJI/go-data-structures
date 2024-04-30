@@ -43,8 +43,39 @@ func TestStackIsEmpty(t *testing.T) {
 
 }
 func TestStackPush(t *testing.T) {
+	testCases := []struct {
+		s           Stack
+		shouldError bool
+	}{
+		{Stack{buffer: [stackSize]int{}, index: -1}, false},
+		{Stack{buffer: [stackSize]int{}, index: 2}, false},
+		{Stack{buffer: [stackSize]int{}, index: stackSize - 1}, true},
+		{Stack{buffer: [stackSize]int{1, 2, 3, 4, 5}, index: -1}, false},
+	}
+	for i, tc := range testCases {
+		err := tc.s.Push(1)
+		if err == nil && tc.shouldError {
+			t.Fatalf("Test[%d] : Shouldn't be able to push to stack %v", i, tc.s)
 
-	
+		}
+	}
+
 }
 func TestStackPop(t *testing.T) {
+	testCases := []struct {
+		s           Stack
+		shouldError bool
+	}{
+		{Stack{buffer: [stackSize]int{}, index: -1}, true},
+		{Stack{buffer: [stackSize]int{}, index: 2}, false},
+		{Stack{buffer: [stackSize]int{}, index: stackSize - 1}, false},
+		{Stack{buffer: [stackSize]int{1, 2, 3, 4, 5}, index: -1}, true},
+	}
+	for i, tc := range testCases {
+		_, err := tc.s.Pop()
+		if err == nil && tc.shouldError {
+			t.Fatalf("Test[%d] : Shouldn't be able to push to stack %v", i, tc.s)
+
+		}
+	}
 }
