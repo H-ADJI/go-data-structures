@@ -26,7 +26,7 @@ func NewRandomBinaryTree(elements ...int) *treeNode {
 }
 
 func (root *treeNode) InOrderTraversal() []int {
-	elements := make([]int, 1)
+	elements := make([]int, 0)
 
 	if root.left != nil {
 		elements = append(elements, root.left.InOrderTraversal()...)
@@ -42,29 +42,29 @@ func (root *treeNode) InOrderTraversal() []int {
 }
 
 func (root *treeNode) PreOrderTraversal() []int {
-	elements := make([]int, 1)
+	elements := make([]int, 0)
 
 	elements = append(elements, root.data)
 
 	if root.left != nil {
-		elements = append(elements, root.left.InOrderTraversal()...)
+		elements = append(elements, root.left.PreOrderTraversal()...)
 	}
 
 	if root.right != nil {
-		elements = append(elements, root.right.InOrderTraversal()...)
+		elements = append(elements, root.right.PreOrderTraversal()...)
 	}
 
 	return elements
 }
 
 func (root *treeNode) PostOrderTraversal() []int {
-	elements := make([]int, 1)
+	elements := make([]int, 0)
 
 	if root.left != nil {
-		elements = append(elements, root.left.InOrderTraversal()...)
+		elements = append(elements, root.left.PostOrderTraversal()...)
 	}
 	if root.right != nil {
-		elements = append(elements, root.right.InOrderTraversal()...)
+		elements = append(elements, root.right.PostOrderTraversal()...)
 	}
 
 	elements = append(elements, root.data)
