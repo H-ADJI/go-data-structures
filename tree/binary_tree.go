@@ -86,6 +86,11 @@ func (root *treeNode) Height() int {
 }
 
 func (root *treeNode) IsFull() bool {
+	if root.left == nil && root.right == nil {
+		return true
+	} else if root.left != nil && root.right != nil {
+		return root.left.IsFull() && root.right.IsFull()
+	}
 	return false
 }
 

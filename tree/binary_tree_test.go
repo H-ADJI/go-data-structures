@@ -57,9 +57,16 @@ func TestPostOrderTraversal(t *testing.T) {
 	}
 }
 
-func TestTreeheight(t *testing.T) {
+func TestTreeHeight(t *testing.T) {
 	tree := createSampleTree()
 	if tree.Height() != 2 {
 		t.Fatal("wrong height")
+	}
+}
+
+func TestTreeIsFull(t *testing.T) {
+	tree := createSampleTree()
+	if tree.IsFull() {
+		t.Fatal("wrong the tree is not full")
 	}
 }
