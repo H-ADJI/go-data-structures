@@ -2,6 +2,7 @@ package tree
 
 import (
 	"fmt"
+	"math"
 	"math/rand"
 	"strings"
 )
@@ -71,6 +72,21 @@ func (root *treeNode) PostOrderTraversal() []int {
 
 	return elements
 
+}
+func (root *treeNode) Height() int {
+	if root.left == nil && root.right == nil {
+		return 0
+	} else if root.left == nil {
+		return root.right.Height() + 1
+	} else if root.right == nil {
+		return root.left.Height() + 1
+	}
+	height := math.Max(float64(root.left.Height()), float64(root.right.Height())) + 1
+	return int(height)
+}
+
+func (root *treeNode) IsFull() bool {
+	return false
 }
 
 func (root *treeNode) String() string {

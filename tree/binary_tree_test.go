@@ -24,9 +24,6 @@ func createSampleTree() *treeNode {
 	return &tree
 }
 
-func TestNewRandomBinaryTree(t *testing.T) {
-}
-
 func TestInOrderTraversal(t *testing.T) {
 	tree := createSampleTree()
 	elements := tree.InOrderTraversal()
@@ -57,5 +54,12 @@ func TestPostOrderTraversal(t *testing.T) {
 		if expected[i] != el {
 			t.Fatalf("postorder traversal wrong, expected : %d, but got : %d\n", expected[i], el)
 		}
+	}
+}
+
+func TestTreeheight(t *testing.T) {
+	tree := createSampleTree()
+	if tree.Height() != 2 {
+		t.Fatal("wrong height")
 	}
 }
