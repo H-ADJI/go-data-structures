@@ -23,6 +23,25 @@ func createSampleTree() *treeNode {
 	tree.left.left = &treeNode{data: 4}
 	return &tree
 }
+func createFullTree() *treeNode {
+	tree := treeNode{data: 1}
+	tree.right = &treeNode{data: 2}
+	tree.left = &treeNode{data: 3}
+	tree.right.right = &treeNode{data: 7}
+	tree.right.left = &treeNode{data: 8}
+	return &tree
+}
+
+func createPerfectTree() *treeNode {
+	tree := treeNode{data: 1}
+	tree.right = &treeNode{data: 2}
+	tree.left = &treeNode{data: 3}
+	tree.right.right = &treeNode{data: 7}
+	tree.right.left = &treeNode{data: 8}
+	tree.left.left = &treeNode{data: 4}
+	tree.left.right = &treeNode{data: 5}
+	return &tree
+}
 
 func TestInOrderTraversal(t *testing.T) {
 	tree := createSampleTree()
@@ -66,7 +85,23 @@ func TestTreeHeight(t *testing.T) {
 
 func TestTreeIsFull(t *testing.T) {
 	tree := createSampleTree()
+	fullTree := createFullTree()
 	if tree.IsFull() {
-		t.Fatal("wrong the tree is not full")
+		t.Fatalf("wrong the tree is not full \n%s", tree)
+	}
+	if !fullTree.IsFull() {
+		t.Fatalf("wrong the tree is full \n%s", fullTree)
+
+	}
+}
+
+func TestTreeIsPerfect(t *testing.T) {
+	tree := createSampleTree()
+	perfectTree := createPerfectTree()
+	if tree.IsPerfect(tree.Height(), 0) {
+		t.Fatalf("wrong the tree is not perfect \n%s", tree)
+	}
+	if !perfectTree.IsPerfect(perfectTree.Height(), 0) {
+		t.Fatalf("wrong the tree is perfect \n%s", perfectTree)
 	}
 }

@@ -86,12 +86,24 @@ func (root *treeNode) Height() int {
 }
 
 func (root *treeNode) IsFull() bool {
+	// internal nodes either have 2 child nodes or none
 	if root.left == nil && root.right == nil {
 		return true
 	} else if root.left != nil && root.right != nil {
 		return root.left.IsFull() && root.right.IsFull()
 	}
 	return false
+}
+
+func (root *treeNode) IsPerfect(height int, currentLvL int) bool {
+	// internal nodes have exactly 2 child nodes
+	if root.left == nil && root.right == nil {
+		return currentLvL == height
+	} else if root.left == nil || root.right == nil {
+		return false
+	}
+
+	return root.left.IsPerfect(height, currentLvL+1) && root.right.IsPerfect(height, currentLvL+1)
 }
 
 func (root *treeNode) String() string {
