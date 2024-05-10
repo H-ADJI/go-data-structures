@@ -6,11 +6,15 @@ import (
 
 func createSampleTree() *treeNode {
 	/*
+		This is the right side of the tree
+
 			│   │   ├── 7
 		│   ├── 2
 		└── 1
 			└── 3
 				└── 4
+
+		This is the left side of the tree
 	*/
 	tree := treeNode{data: 1}
 	tree.right = &treeNode{data: 2}
