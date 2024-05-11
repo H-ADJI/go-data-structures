@@ -26,6 +26,16 @@ func NewRandomBinaryTree(elements ...int) *treeNode {
 	return &rootNode
 }
 
+func NewCompleteBinaryTree(index int, elements ...int) *treeNode {
+	if index < len(elements) {
+		node := &treeNode{data: elements[index]}
+		node.left = &treeNode{data: elements[2*index+1]}
+		node.right = &treeNode{data: elements[2*index+2]}
+		return node
+	}
+	return nil
+}
+
 func (root *treeNode) InOrderTraversal() []int {
 	elements := make([]int, 0)
 
@@ -85,6 +95,17 @@ func (root *treeNode) Height() int {
 	return int(height)
 }
 
+func (root *treeNode) CountNodes() int {
+	if root.left != nil && root.right != nil {
+		return 1 + root.left.CountNodes() + root.right.CountNodes()
+	} else if root.left == nil && root.right != nil {
+		return 1 + root.right.CountNodes()
+	} else if root.right == nil && root.left != nil {
+		return 1 + root.left.CountNodes()
+	}
+	return 1
+}
+
 func (root *treeNode) IsFull() bool {
 	// internal nodes either have 2 child nodes or none
 	if root.left == nil && root.right == nil {
@@ -105,6 +126,13 @@ func (root *treeNode) IsPerfect(height int, currentLvL int) bool {
 
 	return root.left.IsPerfect(height, currentLvL+1) && root.right.IsPerfect(height, currentLvL+1)
 }
+
+// func (root *treeNode) IsComplete(height int, currentLvL int) bool {
+// 	if root == nil {
+// 		return true
+// 	}
+// 	return false
+// }
 
 func (root *treeNode) String() string {
 	return root.stringWithIndent("", true)

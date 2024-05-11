@@ -105,3 +105,10 @@ func TestTreeIsPerfect(t *testing.T) {
 		t.Fatalf("wrong the tree is perfect \n%s", perfectTree)
 	}
 }
+
+func TestTreeNodesCount(t *testing.T) {
+	tree := createSampleTree()
+	if tree.CountNodes() != 5 {
+		t.Fatalf("wrong nubmer of nodes in the tree %d \n", tree.CountNodes())
+	}
+}
