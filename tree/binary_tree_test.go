@@ -43,6 +43,15 @@ func createPerfectTree() *treeNode {
 	return &tree
 }
 
+func createCompleteTree() *treeNode {
+	tree := treeNode{data: 1}
+	tree.right = &treeNode{data: 2}
+	tree.left = &treeNode{data: 3}
+	tree.right.left = &treeNode{data: 8}
+	tree.left.left = &treeNode{data: 4}
+	tree.left.right = &treeNode{data: 5}
+	return &tree
+}
 func TestInOrderTraversal(t *testing.T) {
 	tree := createSampleTree()
 	elements := tree.InOrderTraversal()
@@ -103,6 +112,17 @@ func TestTreeIsPerfect(t *testing.T) {
 	}
 	if !perfectTree.IsPerfect(perfectTree.Height(), 0) {
 		t.Fatalf("wrong the tree is perfect \n%s", perfectTree)
+	}
+}
+
+func TestTreeIsComplete(t *testing.T) {
+	tree := createSampleTree()
+	completeTree := createCompleteTree()
+	if tree.IsComplete(0, tree.CountNodes()) {
+		t.Fatalf("wrong the tree is not complete \n%s", tree)
+	}
+	if !completeTree.IsComplete(0, completeTree.CountNodes()) {
+		t.Fatalf("wrong the tree is complete \n%s", completeTree)
 	}
 }
 

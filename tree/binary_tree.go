@@ -127,13 +127,19 @@ func (root *treeNode) IsPerfect(height int, currentLvL int) bool {
 	return root.left.IsPerfect(height, currentLvL+1) && root.right.IsPerfect(height, currentLvL+1)
 }
 
-// func (root *treeNode) IsComplete(height int, currentLvL int) bool {
-// 	if root == nil {
-// 		return true
-// 	}
-// 	return false
-// }
-
+func (root *treeNode) IsComplete(index int, maxIndex int) bool {
+	if index >= maxIndex {
+		return false
+	}
+	if root.left != nil && root.right != nil {
+		return root.left.IsComplete(2*index+1, maxIndex) && root.right.IsComplete(2*index+2, maxIndex)
+	} else if root.right == nil && root.left != nil {
+		return root.left.IsComplete(2*index+1, maxIndex)
+	} else if root.left == nil && root.right != nil {
+		return root.right.IsComplete(2*index+2, maxIndex)
+	}
+	return true
+}
 func (root *treeNode) String() string {
 	return root.stringWithIndent("", true)
 }
