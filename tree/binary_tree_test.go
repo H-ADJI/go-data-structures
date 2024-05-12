@@ -153,3 +153,14 @@ func TestTreeNodesCount(t *testing.T) {
 		t.Fatalf("wrong nubmer of nodes in the tree %d \n", tree.CountNodes())
 	}
 }
+
+func TestTreeIsBalanced(t *testing.T) {
+	unBalancedTree := createUnBalancedTree()
+	balancedTree := createBalancedTree()
+	if unBalancedTree.IsBalanced(0) {
+		t.Fatalf("wrong the tree is not balanced \n%s", unBalancedTree)
+	}
+	if !balancedTree.IsBalanced(0) {
+		t.Fatalf("wrong the tree is balanced \n%s", balancedTree)
+	}
+}
