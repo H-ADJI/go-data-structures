@@ -140,6 +140,20 @@ func (root *treeNode) IsComplete(index int, maxIndex int) bool {
 	}
 	return true
 }
+
+// Height balanced tree check
+func (root *treeNode) IsBalanced(height int) bool {
+	if root.left != nil && root.right != nil {
+		return root.left.IsBalanced(height) && root.right.IsBalanced(height)
+	} else if root.left != nil && root.right == nil {
+		return root.left.IsBalanced(height + 1)
+	} else if root.right != nil && root.left == nil {
+		return root.right.IsBalanced(height + 1)
+	} else {
+		return height <= 1
+	}
+}
+
 func (root *treeNode) String() string {
 	return root.stringWithIndent("", true)
 }

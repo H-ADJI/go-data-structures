@@ -52,6 +52,27 @@ func createCompleteTree() *treeNode {
 	tree.left.right = &treeNode{data: 5}
 	return &tree
 }
+
+func createBalancedTree() *treeNode {
+	tree := treeNode{data: 1}
+	tree.right = &treeNode{data: 2}
+	tree.left = &treeNode{data: 3}
+	tree.right.left = &treeNode{data: 8}
+	tree.left.left = &treeNode{data: 4}
+	tree.left.right = &treeNode{data: 5}
+	return &tree
+}
+
+func createUnBalancedTree() *treeNode {
+	tree := treeNode{data: 1}
+	tree.right = &treeNode{data: 2}
+	tree.left = &treeNode{data: 3}
+	tree.right.left = &treeNode{data: 8}
+	tree.right.left.right = &treeNode{data: 8}
+	tree.left.left = &treeNode{data: 4}
+	tree.left.right = &treeNode{data: 5}
+	return &tree
+}
 func TestInOrderTraversal(t *testing.T) {
 	tree := createSampleTree()
 	elements := tree.InOrderTraversal()
