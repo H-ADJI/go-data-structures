@@ -188,6 +188,33 @@ func (root *treeNode) BinarySearch(el int) bool {
 	}
 }
 
+func (root *treeNode) InsertIntoBinarySearchTree(el int) *treeNode {
+	current := root
+	for current.data != el {
+		if current.data > el {
+			if current.left != nil {
+				current = current.left
+			} else {
+				current.left = &treeNode{data: el}
+				break
+			}
+		} else {
+			if current.right != nil {
+				current = current.right
+			} else {
+				current.right = &treeNode{data: el}
+				break
+			}
+		}
+	}
+
+	return root
+}
+
+func (root treeNode) DeleteFromBinarySearchTree(el int) bool {
+	return false
+}
+
 func (root *treeNode) String() string {
 	return root.stringWithIndent("", true)
 }

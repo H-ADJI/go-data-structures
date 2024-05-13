@@ -200,3 +200,15 @@ func TestBinarySearch(t *testing.T) {
 		t.Fatalf("wrong, impossible operation the tree isn't a bianry search tree \n%s", binarySearchTree)
 	}
 }
+
+func TestInsertIntoBinarySearchTree(t *testing.T) {
+	binarySearchTree := createBinarySearchTree()
+	binarySearchTree = binarySearchTree.InsertIntoBinarySearchTree(99)
+	if !binarySearchTree.BinarySearch(99) {
+		t.Fatalf("wrong the tree contains the node 99 \n%s", binarySearchTree)
+	}
+
+	if !binarySearchTree.BinarySearch(10) {
+		t.Fatalf("wrong the tree contains the node 10 \n%s", binarySearchTree)
+	}
+}
