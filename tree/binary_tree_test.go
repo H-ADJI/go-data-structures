@@ -180,10 +180,10 @@ func TestIsBinarySearchTree(t *testing.T) {
 	tree := createSampleTree()
 	binarySearchTree := createBinarySearchTree()
 	if tree.IsBinarySearchTree() {
-		t.Fatalf("wrong the tree is not balanced \n%s", tree)
+		t.Fatalf("wrong the tree is not a binary search tree \n%s", tree)
 	}
 	if !binarySearchTree.IsBinarySearchTree() {
-		t.Fatalf("wrong the tree is balanced \n%s", binarySearchTree)
+		t.Fatalf("wrong the tree is a bianry search tree \n%s", binarySearchTree)
 	}
 }
 
@@ -204,10 +204,16 @@ func TestBinarySearch(t *testing.T) {
 func TestInsertIntoBinarySearchTree(t *testing.T) {
 	binarySearchTree := createBinarySearchTree()
 	binarySearchTree = binarySearchTree.InsertIntoBinarySearchTree(99)
+	if !binarySearchTree.IsBinarySearchTree() {
+		t.Fatalf("wrong the tree is not a binary search tree \n%s", binarySearchTree)
+	}
 	if !binarySearchTree.BinarySearch(99) {
 		t.Fatalf("wrong the tree contains the node 99 \n%s", binarySearchTree)
 	}
 
+	if !binarySearchTree.IsBinarySearchTree() {
+		t.Fatalf("wrong the tree is not a binary search tree \n%s", binarySearchTree)
+	}
 	if !binarySearchTree.BinarySearch(10) {
 		t.Fatalf("wrong the tree contains the node 10 \n%s", binarySearchTree)
 	}
