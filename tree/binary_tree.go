@@ -167,12 +167,25 @@ func (root *treeNode) IsBinarySearchTree() bool {
 	}
 }
 
-func (root *treeNode) BinarySearch() bool {
+func (root *treeNode) BinarySearch(el int) bool {
 	if !root.IsBinarySearchTree() {
 		fmt.Println("Not a binary search tree, expensive operation XD")
 		return false
 	}
-	return false
+	current := root.data
+	if el == current {
+		return true
+	} else if current > el {
+		if root.left != nil {
+			return root.left.BinarySearch(el)
+		}
+		return false
+	} else {
+		if root.right != nil {
+			return root.right.BinarySearch(el)
+		}
+		return false
+	}
 }
 func (root *treeNode) String() string {
 	return root.stringWithIndent("", true)
