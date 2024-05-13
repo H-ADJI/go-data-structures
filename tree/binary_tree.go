@@ -187,6 +187,7 @@ func (root *treeNode) BinarySearch(el int) bool {
 		return false
 	}
 }
+
 func (root *treeNode) String() string {
 	return root.stringWithIndent("", true)
 }

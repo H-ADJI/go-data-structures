@@ -186,3 +186,17 @@ func TestIsBinarySearchTree(t *testing.T) {
 		t.Fatalf("wrong the tree is balanced \n%s", binarySearchTree)
 	}
 }
+
+func TestBinarySearch(t *testing.T) {
+	binarySearchTree := createBinarySearchTree()
+	tree := createSampleTree()
+	if !binarySearchTree.BinarySearch(10) {
+		t.Fatalf("wrong the tree contains the node 10 \n%s", binarySearchTree)
+	}
+	if binarySearchTree.BinarySearch(100) {
+		t.Fatalf("wrong the tree doesn't contains the node 100 \n%s", binarySearchTree)
+	}
+	if tree.BinarySearch(100) {
+		t.Fatalf("wrong, impossible operation the tree isn't a bianry search tree \n%s", binarySearchTree)
+	}
+}
