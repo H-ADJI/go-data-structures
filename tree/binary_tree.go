@@ -153,7 +153,27 @@ func (root *treeNode) IsBalanced(height int) bool {
 		return height <= 1
 	}
 }
+func (root *treeNode) IsBinarySearchTree() bool {
+	left := root.left
+	right := root.right
+	if left != nil && right != nil {
+		return left.data <= root.data && root.data <= right.data && left.IsBinarySearchTree() && right.IsBinarySearchTree()
+	} else if left == nil && right != nil {
+		return root.data <= right.data && right.IsBinarySearchTree()
+	} else if right == nil && left != nil {
+		return root.data <= left.data && left.IsBinarySearchTree()
+	} else {
+		return true
+	}
+}
 
+func (root *treeNode) BinarySearch() bool {
+	if !root.IsBinarySearchTree() {
+		fmt.Println("Not a binary search tree, expensive operation XD")
+		return false
+	}
+	return false
+}
 func (root *treeNode) String() string {
 	return root.stringWithIndent("", true)
 }

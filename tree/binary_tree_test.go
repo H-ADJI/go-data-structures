@@ -73,6 +73,17 @@ func createUnBalancedTree() *treeNode {
 	tree.left.right = &treeNode{data: 5}
 	return &tree
 }
+
+func createBinarySearchTree() *treeNode {
+	tree := treeNode{data: 8}
+	tree.right = &treeNode{data: 10}
+	tree.left = &treeNode{data: 5}
+	tree.right.left = &treeNode{data: 9}
+	tree.right.right = &treeNode{data: 11}
+	tree.left.left = &treeNode{data: 4}
+	tree.left.right = &treeNode{data: 7}
+	return &tree
+}
 func TestInOrderTraversal(t *testing.T) {
 	tree := createSampleTree()
 	elements := tree.InOrderTraversal()
@@ -162,5 +173,16 @@ func TestTreeIsBalanced(t *testing.T) {
 	}
 	if !balancedTree.IsBalanced(0) {
 		t.Fatalf("wrong the tree is balanced \n%s", balancedTree)
+	}
+}
+
+func TestIsBinarySearchTree(t *testing.T) {
+	tree := createSampleTree()
+	binarySearchTree := createBinarySearchTree()
+	if tree.IsBinarySearchTree() {
+		t.Fatalf("wrong the tree is not balanced \n%s", tree)
+	}
+	if !binarySearchTree.IsBinarySearchTree() {
+		t.Fatalf("wrong the tree is balanced \n%s", binarySearchTree)
 	}
 }
