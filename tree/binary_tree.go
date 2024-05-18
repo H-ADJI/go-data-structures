@@ -188,7 +188,7 @@ func (root *treeNode) BinarySearch(el int) bool {
 	}
 }
 
-func (root *treeNode) InsertIntoBinarySearchTree(el int) *treeNode {
+func (root *treeNode) InsertIntoBinarySearchTree(el int) {
 	current := root
 	for current.data != el {
 		if current.data > el {
@@ -207,8 +207,6 @@ func (root *treeNode) InsertIntoBinarySearchTree(el int) *treeNode {
 			}
 		}
 	}
-
-	return root
 }
 
 func (root treeNode) DeleteFromBinarySearchTree(el int) bool {

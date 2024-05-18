@@ -203,7 +203,7 @@ func TestBinarySearch(t *testing.T) {
 
 func TestInsertIntoBinarySearchTree(t *testing.T) {
 	binarySearchTree := createBinarySearchTree()
-	binarySearchTree = binarySearchTree.InsertIntoBinarySearchTree(99)
+	binarySearchTree.InsertIntoBinarySearchTree(99)
 	if !binarySearchTree.IsBinarySearchTree() {
 		t.Fatalf("wrong the tree is not a binary search tree \n%s", binarySearchTree)
 	}
