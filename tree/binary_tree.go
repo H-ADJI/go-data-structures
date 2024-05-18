@@ -154,17 +154,13 @@ func (root *treeNode) IsBalanced(height int) bool {
 	}
 }
 func (root *treeNode) IsBinarySearchTree() bool {
-	left := root.left
-	right := root.right
-	if left != nil && right != nil {
-		return left.data <= root.data && root.data <= right.data && left.IsBinarySearchTree() && right.IsBinarySearchTree()
-	} else if left == nil && right != nil {
-		return root.data <= right.data && right.IsBinarySearchTree()
-	} else if right == nil && left != nil {
-		return root.data <= left.data && left.IsBinarySearchTree()
-	} else {
-		return true
+	l := root.InOrderTraversal()
+	for i := range len(l) - 1 {
+		if l[i] > l[i+1] {
+			return false
+		}
 	}
+	return true
 }
 
 func (root *treeNode) BinarySearch(el int) bool {
@@ -210,6 +206,7 @@ func (root *treeNode) InsertIntoBinarySearchTree(el int) {
 }
 
 func (root treeNode) DeleteFromBinarySearchTree(el int) bool {
+
 	return false
 }
 
