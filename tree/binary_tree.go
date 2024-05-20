@@ -205,9 +205,38 @@ func (root *treeNode) InsertIntoBinarySearchTree(el int) {
 	}
 }
 
-func (root treeNode) DeleteFromBinarySearchTree(el int) bool {
-
-	return false
+func (root *treeNode) DeleteFromBinarySearchTree(el int) *treeNode {
+	if root.data > el {
+		if root.left != nil {
+			root.left = root.left.DeleteFromBinarySearchTree(el)
+		}
+	} else if root.data < el {
+		if root.right != nil {
+			root.right = root.right.DeleteFromBinarySearchTree(el)
+		}
+	} else {
+		if root.left == nil && root.right == nil {
+			// case 1 : node has no children, we delete it by returning nil to the previous call,
+			// so its root ascendant doesn't have any child node
+			return nil
+		} else if root.left != nil && root.right == nil {
+			// case 2 : node has one child, we replace current node data with its child data, and try to delete the child data recursively
+			root.data = root.left.data
+			root.left = root.left.DeleteFromBinarySearchTree(root.data)
+		} else if root.right != nil && root.left == nil {
+			root.data = root.right.data
+			root.right = root.right.DeleteFromBinarySearchTree(root.data)
+		} else {
+			// case 3 : node has 2 child, chose from bigest value from left for example, so that every value in left sub-tree is smaller than the choosen value
+			currentMax := root.left
+			for currentMax.right != nil {
+				currentMax = currentMax.right
+			}
+			root.data = currentMax.data
+			root.left = root.left.DeleteFromBinarySearchTree(currentMax.data)
+		}
+	}
+	return root
 }
 
 func (root *treeNode) String() string {

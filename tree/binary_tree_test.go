@@ -82,6 +82,7 @@ func createBinarySearchTree() *treeNode {
 	tree.right.right = &treeNode{data: 11}
 	tree.left.left = &treeNode{data: 4}
 	tree.left.right = &treeNode{data: 7}
+	tree.left.right.left = &treeNode{data: 6}
 	return &tree
 }
 func TestInOrderTraversal(t *testing.T) {
@@ -217,4 +218,22 @@ func TestInsertIntoBinarySearchTree(t *testing.T) {
 	if !binarySearchTree.BinarySearch(10) {
 		t.Fatalf("wrong the tree contains the node 10 \n%s", binarySearchTree)
 	}
+}
+
+func TestDeleteFromBST(t *testing.T) {
+	binarySearchTree := createBinarySearchTree()
+	toFind := []int{5, 10, 4, 11, 9}
+	notFind := []int{8, 7, 6, 7, 6, 7}
+	for _, el := range notFind {
+		binarySearchTree = binarySearchTree.DeleteFromBinarySearchTree(el)
+		if binarySearchTree.BinarySearch(el) {
+			t.Fatalf("wrong, the tree shouldn't contain %d \n%s", el, binarySearchTree)
+		}
+	}
+	for _, el := range toFind {
+		if !binarySearchTree.BinarySearch(el) {
+			t.Fatalf("wrong, the tree should contain %d \n%s", el, binarySearchTree)
+		}
+	}
+
 }
