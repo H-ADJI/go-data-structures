@@ -142,17 +142,25 @@ func (root *treeNode) IsComplete(index int, maxIndex int) bool {
 }
 
 // Height balanced tree check
-func (root *treeNode) IsBalanced(height int) bool {
-	if root.left != nil && root.right != nil {
-		return root.left.IsBalanced(height) && root.right.IsBalanced(height)
-	} else if root.left != nil && root.right == nil {
-		return root.left.IsBalanced(height + 1)
-	} else if root.right != nil && root.left == nil {
-		return root.right.IsBalanced(height + 1)
+func (root *treeNode) IsBalanced() (bool, float64) {
+	var rBalanced, lBalanced bool
+	var rHeight, lHeight float64
+	if root.right == nil && root.left == nil {
+		return true, 1
+	} else if root.right != nil && root.left != nil {
+		rBalanced, rHeight = root.right.IsBalanced()
+		lBalanced, lHeight = root.left.IsBalanced()
+	} else if root.right != nil {
+		rBalanced, rHeight = root.right.IsBalanced()
+		lBalanced, lHeight = true, 0.0
 	} else {
-		return height <= 1
+		rBalanced, rHeight = root.left.IsBalanced()
+		lBalanced, lHeight = true, 0.0
 	}
+	fmt.Println(math.Abs(rHeight - lHeight))
+	return rBalanced && lBalanced && math.Abs(rHeight-lHeight) <= 1, 1 + math.Max(rHeight, lHeight)
 }
+
 func (root *treeNode) IsBinarySearchTree() bool {
 	l := root.InOrderTraversal()
 	for i := range len(l) - 1 {

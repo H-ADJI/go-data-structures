@@ -65,10 +65,7 @@ func createBalancedTree() *treeNode {
 
 func createUnBalancedTree() *treeNode {
 	tree := treeNode{data: 1}
-	tree.right = &treeNode{data: 2}
 	tree.left = &treeNode{data: 3}
-	tree.right.left = &treeNode{data: 8}
-	tree.right.left.right = &treeNode{data: 8}
 	tree.left.left = &treeNode{data: 4}
 	tree.left.right = &treeNode{data: 5}
 	return &tree
@@ -169,10 +166,12 @@ func TestTreeNodesCount(t *testing.T) {
 func TestTreeIsBalanced(t *testing.T) {
 	unBalancedTree := createUnBalancedTree()
 	balancedTree := createBalancedTree()
-	if unBalancedTree.IsBalanced(0) {
+	isbalanced, _ := unBalancedTree.IsBalanced()
+	if isbalanced {
 		t.Fatalf("wrong the tree is not balanced \n%s", unBalancedTree)
 	}
-	if !balancedTree.IsBalanced(0) {
+	isbalanced, _ = balancedTree.IsBalanced()
+	if !isbalanced {
 		t.Fatalf("wrong the tree is balanced \n%s", balancedTree)
 	}
 }
